@@ -1,1 +1,1 @@
-# halite
+# com.nerdery.halite
