@@ -1,10 +1,21 @@
 #!/bin/bash
 
+rm MyBot.jar
+rm RandomBot.jar
 rm -rf target
 mkdir target
 
 javac src/com/nerdery/halite/starter/*.java -d target
-javac -cp target src/com/nerdery/msoule/mybot/MyBot.java -d target
+javac -cp target src/com/nerdery/logging/*.java -d target
+javac -cp target src/com/nerdery/msoule/mybot/*.java -d target
 javac -cp target src/com/nerdery/halite/example/RandomBot.java -d target
 
-~/halite/halite -d "25 25" "java -cp target com.nerdery.msoule.mybot.MyBot" "java -cp target com.nerdery.halite.example.RandomBot"
+cd target
+jar -cvfm MyBot.jar ../mybot.mf .
+jar -cvfm RandomBot.jar ../random.mf .
+
+mv MyBot.jar ..
+mv RandomBot.jar ..
+cd ..
+
+~/halite/halite -d "25 25" "sh MyBot.sh" "java -jar MyBotDecent.jar"
