@@ -6,29 +6,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RandomBot {
-    public static void main(String[] args) throws java.io.IOException {
 
-        final InitPackage iPackage = Networking.getInit();
-        final int myID = iPackage.myID;
-        final GameMap gameMap = iPackage.map;
+  public static void main(String[] args) throws java.io.IOException {
 
-        Networking.sendInit("RandomJavaBot");
+    final InitPackage iPackage = Networking.getInit();
+    final int myID = iPackage.myID;
+    final GameMap gameMap = iPackage.map;
 
-        while(true) {
-            List<Move> moves = new ArrayList<Move>();
+    Networking.sendInit("RandomJavaBot");
 
-            Networking.updateFrame(gameMap);
+    while (true) {
+      List<Move> moves = new ArrayList<Move>();
 
-            for (int y = 0; y < gameMap.height; y++) {
-                for (int x = 0; x < gameMap.width; x++) {
-                    final Location location = gameMap.getLocation(x, y);
-                    final Site site = location.getSite();
-                    if(site.owner == myID) {
-                        moves.add(new Move(location, Direction.randomDirection()));
-                    }
-                }
-            }
-            Networking.sendFrame(moves);
+      Networking.updateFrame(gameMap);
+
+      for (int y = 0; y < gameMap.height; y++) {
+        for (int x = 0; x < gameMap.width; x++) {
+          final Location location = gameMap.getLocation(x, y);
+          final Site site = location.getSite();
+          if (site.owner == myID) {
+            moves.add(new Move(location, Direction.randomDirection()));
+          }
         }
+      }
+      Networking.sendFrame(moves);
     }
+  }
 }
