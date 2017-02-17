@@ -12,26 +12,6 @@ public class Location {
     this.site = site;
   }
 
-  /**
-   * Get the direction of another location relative to this one. Prefering the x axis.
-   *
-   * @param otherLocation Another location on the map.
-   * @return The Direction relative to this.
-   */
-  public Direction getDirection(Location otherLocation) {
-    if (x < otherLocation.getX()) {
-      return Direction.EAST;
-    } else if (x > otherLocation.getX()) {
-      return Direction.WEST;
-    } else if (y < otherLocation.getY()) {
-      return Direction.SOUTH;
-    } else if (y > otherLocation.getY()) {
-      return Direction.NORTH;
-    } else {
-      return Direction.STILL;
-    }
-  }
-
   public int getX() {
     return x;
   }
