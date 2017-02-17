@@ -82,6 +82,48 @@ public class GameMap {
     }
   }
 
+  public Direction getDirection(Location source, Location target) {
+    if (source.getX() < target.getX()) {
+      if(eastWest(source, target)) {
+        return Direction.WEST;
+      } else {
+        return Direction.EAST;
+      }
+    } else if (target.getX() < source.getX()) {
+      if(eastWest(target, source)) {
+        return Direction.EAST;
+      } else {
+        return Direction.WEST;
+      }
+    } else if (source.getY() < target.getY()) {
+      if(northSouth(source, target)) {
+        return Direction.NORTH;
+      } else {
+        return Direction.SOUTH;
+      }
+    } else if (target.getY() < source.getY()) {
+      if(northSouth(source, target)) {
+        return Direction.SOUTH;
+      } else {
+        return Direction.NORTH;
+      }
+    } else {
+      return Direction.STILL;
+    }
+  }
+
+  private boolean eastWest(Location smallerX, Location largerX) {
+    int dxA = Math.abs(largerX.getX() - smallerX.getX());
+    int dxB = smallerX.getX() + Math.abs(width - largerX.getX());
+    return dxA > dxB;
+  }
+
+  private boolean northSouth(Location smallerY, Location largerY) {
+    int dyA = Math.abs(largerY.getY() - smallerY.getY());
+    int dyB = smallerY.getY() + Math.abs(height - largerY.getY());
+    return dyA > dyB;
+  }
+
   public Site getSite(Location loc, Direction dir) {
     return getLocation(loc, dir).getSite();
   }
@@ -92,6 +134,10 @@ public class GameMap {
 
   public Location getLocation(int x, int y) {
     return locations[x][y];
+  }
+
+  public Location[][] getLocations() {
+    return locations;
   }
 
   void reset() {

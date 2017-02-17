@@ -18,4 +18,4 @@ mv MyBot.jar ..
 mv RandomBot.jar ..
 cd ..
 
-~/halite/halite -d "25 25" "sh MyBot.sh" "java -jar MyBotDecent.jar"
+~/halite/halite -d "25 25" "sh MyBot.sh" "sh MyBot.sh"
